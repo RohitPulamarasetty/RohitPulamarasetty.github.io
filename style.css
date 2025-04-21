@@ -64,6 +64,9 @@ nav ul li {
 .logo img {
     max-width: 50px;
     height: auto;
+    pointer-events: none;   /* <-- prevent image from intercepting clicks */
+    z-index: 1;
+    position: relative;
 }
 
 a {
@@ -97,6 +100,8 @@ a:hover {
     height: 24px;
     width: 30px;
     cursor: pointer;
+    z-index: 999;
+    position: relative;
 }
 
 .hamburger-icon span {
@@ -109,13 +114,15 @@ a:hover {
 .menu-links {
     position: absolute;
     top: 100%;
-    right: 0%;
+    right: 0;
     background-color: white;
-    width: fit-content;
+    width: 200px;
     max-height: 0;
     overflow: hidden;
-    transition: all 0.3 ease-in-out;
+    z-index: 998;           /* <-- slightly below the icon */
+    transition: max-height 0.3s ease-in-out;
 }
+
 
 .menu-links a {
     display: block;
