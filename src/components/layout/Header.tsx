@@ -60,6 +60,7 @@ export default function Header() {
               onClick={(e) => {
                 e.preventDefault()
                 window.scrollTo({ top: 0, behavior: 'smooth' })
+                window.history.pushState(null, '', '/')
                 setActiveSection('')
               }}
               className="text-[13px] font-semibold text-[#0f0f0f] dark:text-[#f2f2f2] hover:opacity-50 transition-opacity tracking-tight"
