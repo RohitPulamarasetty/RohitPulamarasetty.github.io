@@ -55,12 +55,17 @@ export default function Header() {
 
           {/* Zone 1 — Brand */}
           <div className="flex-1 flex items-center pointer-events-auto">
-            <Link
+            <a
               href="/"
+              onClick={(e) => {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                setActiveSection('')
+              }}
               className="text-[13px] font-semibold text-[#0f0f0f] dark:text-[#f2f2f2] hover:opacity-50 transition-opacity tracking-tight"
             >
               Rohit P.
-            </Link>
+            </a>
           </div>
 
           {/* Zone 2 — Navigation capsule (desktop only) */}
