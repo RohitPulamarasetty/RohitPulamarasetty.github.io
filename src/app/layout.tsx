@@ -42,7 +42,7 @@ const BASE_URL = 'https://rohitpulamarasetty.github.io'
 // add property "https://rohitpulamarasetty.github.io/" → "HTML tag" method →
 // copy the content value here (just the token, e.g. "abc123..."). Deploy,
 // then click Verify. Leaving it empty renders no verification tag.
-const GOOGLE_SITE_VERIFICATION = ''
+const GOOGLE_SITE_VERIFICATION = 'SgZHaehIh0DTdEEYxC62Qsb80uDqO9GIY-7HreIWarY'
 const TITLE = 'Rohit Kumar Pulamarasetty — IIT Madras Builder & Founder'
 const DESCRIPTION =
   'Rohit Kumar Pulamarasetty is a Data Science student at IIT Madras (BS \'28) and founder of Beyond Binary Solutions. He built IITM Grade Suite (2,000+ students), Findora, and FoundBrew, and is going deeper into machine learning and quantitative finance.'
