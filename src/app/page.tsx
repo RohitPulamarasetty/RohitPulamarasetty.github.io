@@ -1,24 +1,22 @@
 import Hero from '@/components/sections/Hero'
-import FeaturedBuilds from '@/components/sections/FeaturedBuilds'
-import Projects from '@/components/sections/Projects'
+import Work from '@/components/sections/Work'
 import About from '@/components/sections/About'
-import Timeline from '@/components/sections/Timeline'
+import Currently from '@/components/sections/Currently'
 import Skills from '@/components/sections/Skills'
+import Journey from '@/components/sections/Journey'
 import Achievements from '@/components/sections/Achievements'
-import Now from '@/components/sections/Now'
 import Contact from '@/components/sections/Contact'
 
 export default function Home() {
   return (
-    <main>
+    <main id="main">
       <Hero />
-      <FeaturedBuilds />
-      <Projects />
+      <Work />
       <About />
-      <Timeline />
+      <Currently />
       <Skills />
+      <Journey />
       <Achievements />
-      <Now />
       <Contact />
     </main>
   )

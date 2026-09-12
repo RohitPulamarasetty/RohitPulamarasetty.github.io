@@ -3,15 +3,77 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-body), system-ui, sans-serif;
   --font-mono: var(--font-mono-custom), ui-monospace, monospace;
+  --font-pixel: var(--font-pixel-custom), var(--font-mono-custom), monospace;
+}
+
+:root {
+  --color-bg: #f5f0e4;
+  --color-bg-elevated: #ffffff;
+  --color-text: #14120f;
+  --color-text-muted: #5c574d;
+  --color-border: #e4ddc8;
+  --color-accent: #c2661a;
+  --color-accent-soft: #f0c68a;
+  --color-accent-2: #4f7a5c;
+  --grid-line: rgba(20, 18, 15, 0.06);
+
+  /* Hero surface — a distinct, warmer canvas so the hero never blends
+     into the flat section backgrounds below it. */
+  --hero-base: #efe7d6;
+  --hero-top: #f7f2e8;
+  --hero-dot: rgba(20, 18, 15, 0.12);
+  --hero-line: rgba(20, 18, 15, 0.045);
+}
+
+.dark {
+  --color-bg: #0e0d0b;
+  --color-bg-elevated: #17150f;
+  --color-text: #f4efe2;
+  --color-text-muted: #a89f8c;
+  --color-border: #2a2721;
+  --color-accent: #e08b3e;
+  --color-accent-soft: #f0c68a;
+  --color-accent-2: #7fa88c;
+  --grid-line: rgba(244, 239, 226, 0.07);
+
+  --hero-base: #100e0b;
+  --hero-top: #1a1712;
+  --hero-dot: rgba(244, 239, 226, 0.11);
+  --hero-line: rgba(244, 239, 226, 0.04);
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
+  background: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,11 +83,542 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 0, 0, 0.12);
-  color: inherit;
+  background: var(--color-accent);
+  color: #fff;
 }
 
-.dark ::selection {
-  background: rgba(255, 255, 255, 0.15);
-  color: inherit;
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+/* Stepped, 8-bit-style corners — used sparingly on cards/buttons/frames */
+.pixel-corners {
+  clip-path: polygon(
+    0 8px, 8px 8px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+/* Retro push-button shadow: solid offset block instead of a soft blur */
+.pixel-shadow {
+  box-shadow: 4px 4px 0 0 var(--color-text);
+}
+
+.dark .pixel-shadow {
+  box-shadow: 4px 4px 0 0 var(--color-accent-soft);
+}
+
+.pixel-shadow-sm {
+  box-shadow: 2px 2px 0 0 var(--color-text);
+}
+
+.dark .pixel-shadow-sm {
+  box-shadow: 2px 2px 0 0 var(--color-accent-soft);
+}
+
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+.scroll-cue {
+  animation: scroll-cue 2.2s ease-in-out infinite;
+}
+
+/* ============================================================
+   Dot-grid texture — the site's one recurring pixel motif, used
+   as a quiet backdrop instead of a literal illustrated scene.
+   ============================================================ */
+
+.dot-grid {
+  background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ============================================================
+   Identity badges — small pixel-corner chips used in the Hero to
+   show, not tell, the founder / ML+quant duality.
+   ============================================================ */
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.identity-badge {
+  animation: badge-float 5s ease-in-out infinite;
+}
+
+.identity-badge--delay {
+  animation-delay: 1.4s;
+}
+
+.identity-badge--delay-2 {
+  animation-delay: 0.7s;
+}
+
+.identity-badge--delay-3 {
+  animation-delay: 2.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .identity-badge,
+  .scroll-cue {
+    animation: none !important;
+  }
+}
+
+/* Hero photo frame — animated scan sweep + rotating dashed ring for extra design presence */
+@keyframes photo-scan {
+  0% { transform: translateY(-110%); opacity: 0; }
+  8% { opacity: 0.9; }
+  50% { opacity: 0.9; }
+  92% { opacity: 0; }
+  100% { transform: translateY(110%); opacity: 0; }
+}
+
+.photo-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.photo-scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--color-accent) 35%, transparent) 50%, transparent 100%);
+  animation: photo-scan 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-scan::after {
+    animation: none !important;
+  }
+}
+
+.tech-icon {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.tech-icon:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HERO — "system viewport" composition
+   ------------------------------------------------------------
+   Pixel DNA lives in geometry, micro-labels and motion — not in
+   the display type. The name is set in the readable display face;
+   Silkscreen is reserved for tiny HUD labels only.
+   ============================================================ */
+
+/* Hero canvas — layered surface that sets the hero apart from the
+   flat section backgrounds below it. */
+.hero-canvas {
+  background:
+    radial-gradient(120% 90% at 50% -10%, var(--hero-top) 0%, var(--hero-base) 60%);
+}
+
+/* Visible pixel-dot field, masked so it fades behind the text column
+   and toward the edges — texture without hurting readability. */
+.hero-dots {
+  background-image: radial-gradient(var(--hero-dot) 1.6px, transparent 1.7px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(115% 95% at 62% 42%, #000 42%, transparent 92%);
+  mask-image: radial-gradient(115% 95% at 62% 42%, #000 42%, transparent 92%);
+}
+
+/* Fine architectural line grid, very faint, for structure */
+.hero-lines {
+  background-image:
+    linear-gradient(var(--hero-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hero-line) 1px, transparent 1px);
+  background-size: 78px 78px;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(120% 100% at 50% 40%, #000 55%, transparent 100%);
+}
+
+/* Slow-drifting aurora glow behind the portrait — ambient life */
+@keyframes hero-aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate(3%, -4%) scale(1.12); opacity: 1; }
+}
+
+.hero-aurora {
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--color-accent) 26%, transparent), transparent 100%);
+  filter: blur(10px);
+  animation: hero-aurora 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-aurora.is-green {
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--color-accent-2) 22%, transparent), transparent 100%);
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora {
+    animation: none !important;
+  }
+}
+
+/* Cursor-reactive spotlight. Driven by --mx/--my (0–100%), set on
+   the section by a rAF-throttled pointermove. Falls back to a fixed
+   soft glow when JS/motion is off. */
+.hero-spotlight {
+  background: radial-gradient(
+    420px circle at var(--mx, 72%) var(--my, 32%),
+    color-mix(in srgb, var(--color-accent) 12%, transparent) 0%,
+    transparent 62%
+  );
+  transition: background 0.2s ease-out;
+  will-change: background;
+}
+
+/* Terminal caret after the name — the single pixel touch on the type */
+@keyframes name-caret {
+  0%, 46% { opacity: 1; }
+  54%, 100% { opacity: 0; }
+}
+
+.name-caret {
+  display: inline-block;
+  width: 0.14em;
+  height: 0.8em;
+  margin-left: 0.12em;
+  vertical-align: baseline;
+  background: var(--color-accent);
+  translate: 0 0.04em;
+  animation: name-caret 1.15s steps(1) infinite;
+}
+
+/* Consolidated HUD chip — replaces the old scattered floating badges.
+   Anchored to the portrait frame's edges, never floating at random. */
+.hud-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  box-shadow: 3px 3px 0 0 color-mix(in srgb, var(--color-text) 88%, transparent);
+}
+
+.dark .hud-chip {
+  box-shadow: 3px 3px 0 0 color-mix(in srgb, var(--color-accent-soft) 60%, transparent);
+}
+
+/* Portrait viewport — window chrome around the pixel-art cutout */
+.viewport-frame {
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+}
+
+.viewport-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 60%, var(--color-bg-elevated));
+}
+
+/* Signal-strength pixel bars in the viewport bar */
+.signal-bar {
+  width: 3px;
+  background: var(--color-text-muted);
+  opacity: 0.9;
+}
+
+/* Portrait "stage" — dot grid + soft glow so the cutout reads as
+   a figure in a scene, not a PNG floating in empty space */
+.portrait-stage {
+  background-color: color-mix(in srgb, var(--color-bg) 55%, var(--color-bg-elevated));
+  background-image:
+    radial-gradient(
+      ellipse 72% 62% at 50% 80%,
+      color-mix(in srgb, var(--color-accent) 20%, transparent) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      color-mix(in srgb, var(--color-text) 12%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 100% 100%, 18px 18px;
+}
+
+/* Idle drift for the portrait — very slow, cancelled under reduced motion.
+   Runs on an inner wrapper so it composes with the JS mouse-tilt. */
+@keyframes portrait-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.portrait-drift {
+  animation: portrait-drift 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-caret,
+  .portrait-drift {
+    animation: none !important;
+  }
+  .hero-spotlight {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Ambient pixel particles — sparse decorative squares confined to
+   the hero's non-text margins. Adds pixel DNA without touching
+   readability. Positions are fixed (intentional, not random).
+   ============================================================ */
+@keyframes pixel-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.4); }
+}
+
+.pixel-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  animation: pixel-twinkle 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.pixel-particle.is-green {
+  background: var(--color-accent-2);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent-2) 55%, transparent);
+}
+
+.pixel-particle.is-muted {
+  background: var(--color-text-muted);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-particle {
+    animation: none !important;
+    opacity: 0.32 !important;
+  }
+}
+
+/* ============================================================
+   Section system — shared HUD/editorial language across sections
+   ============================================================ */
+
+/* Faint dot texture applied behind section content */
+.section-dots {
+  background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* HUD section index chip: [ 01 ] in mono */
+.section-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 22px;
+  padding: 0 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+}
+
+/* Reusable pixel corner-bracket — draws an L at a card/panel corner.
+   Compose with position + edge classes. */
+.pixel-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--color-accent);
+  pointer-events: none;
+}
+
+/* Card lift + accent — unifies every card's resting/hover feel */
+.pixel-card {
+  position: relative;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.pixel-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 6px 8px 0 -1px color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+.pixel-card:focus-within {
+  border-color: var(--color-accent);
+}
+
+/* A whole card becomes clickable: the primary link stretches to fill it,
+   while nested interactive elements sit above it via .above-stretch. */
+.stretch-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.above-stretch {
+  position: relative;
+  z-index: 2;
+}
+
+/* Icon that nudges on the card/link hover */
+.icon-shift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .icon-shift {
+  transform: translate(3px, -3px);
+}
+
+/* Terminal prompt caret — reuses the hero caret motion, sized in em */
+.term-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 0.1em;
+  translate: 0 0.14em;
+  background: currentColor;
+  animation: name-caret 1.15s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-caret {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Browser-chrome frame — used for Work section product previews
+   ============================================================ */
+
+.browser-frame {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+}
+
+.browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.browser-frame-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-border);
+}
+
+.browser-frame-url {
+  flex: 1;
+  margin-left: 6px;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes preview-pan {
+  0%, 12% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.06) translateY(-3%); }
+  88%, 100% { transform: scale(1) translateY(0); }
+}
+
+.preview-pan {
+  animation: preview-pan 14s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.group:hover .preview-pan,
+.preview-pan:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-pan {
+    animation: none !important;
+  }
+}
+
+/* Pixel skill chip */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.skill-chip:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 0 var(--color-accent);
+}
+
+.skill-chip-icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+/* Nav active-pill indicator, position/size set inline via JS */
+.nav-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  z-index: 0;
 }

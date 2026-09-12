@@ -1,22 +1,32 @@
-export interface Project {
+export interface CaseStudy {
+  id: string
+  name: string
+  blurb: string
+  role: string
+  status: string
+  tech: string[]
+  links: {
+    live?: string
+    github?: string
+  }
+  screenshot?: string
+  stat: { value: string; label: string }
+}
+
+export interface DataProject {
   id: string
   title: string
   description: string
-  longDescription: string
   tech: string[]
+  stat: string
   links: {
     github?: string
-    live?: string
   }
-  featured: boolean
-  category: 'software' | 'data' | 'ml' | 'research'
-  role?: string
-  stat?: string
 }
 
 export interface TimelineItem {
   id: string
-  year: string
+  date: string
   title: string
   organization: string
   description: string
@@ -33,10 +43,9 @@ export interface Achievement {
   title: string
   organization: string
   description: string
-  type: 'award' | 'participation' | 'milestone'
 }
 
-export interface NowItem {
-  category: string
+export interface NowGroup {
+  category: 'Building' | 'Learning' | 'Exploring'
   items: string[]
 }

@@ -1,0 +1,42 @@
+import type { IconType } from 'react-icons'
+import {
+  SiPython,
+  SiPandas,
+  SiNumpy,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiSupabase,
+  SiPostgresql,
+  SiMysql,
+} from 'react-icons/si'
+import { BarChart3, LineChart, PieChart, Table, Database, Plug, Lightbulb, Workflow, TrendingUp, Brain, Bot, Sigma } from 'lucide-react'
+
+export const skillIcons: Record<string, IconType | typeof BarChart3> = {
+  Python: SiPython,
+  SQL: Database,
+  Pandas: SiPandas,
+  NumPy: SiNumpy,
+  Statistics: Sigma,
+  'Power BI': BarChart3,
+  Tableau: PieChart,
+  Excel: Table,
+  'Data Visualization': LineChart,
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
+  React: SiReact,
+  'Next.js': SiNextdotjs,
+  'Node.js': SiNodedotjs,
+  Supabase: SiSupabase,
+  APIs: Plug,
+  PostgreSQL: SiPostgresql,
+  MySQL: SiMysql,
+  'Product Thinking': Lightbulb,
+  Automation: Workflow,
+  'Business Analytics': TrendingUp,
+  'Machine Learning': Brain,
+  'AI Systems': Bot,
+  'Quantitative Finance': Sigma,
+}

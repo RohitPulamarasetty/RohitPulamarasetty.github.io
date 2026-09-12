@@ -8,16 +8,21 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    // Mount-detection for SSR/hydration safety (next-themes pattern) — theme is
+    // unknown on the server, so we defer rendering the icon until the client mounts.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
-    return <div className="w-8 h-8" />
+    return <div className="w-9 h-9" />
   }
 
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-8 h-8 flex items-center justify-center rounded-full text-[#666] dark:text-[#888] hover:text-[#0f0f0f] dark:hover:text-[#f2f2f2] hover:bg-[#f0f0f0] dark:hover:bg-[#1a1a1a] transition-all duration-200"
+      className="w-9 h-9 flex items-center justify-center rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-elevated)] transition-all duration-150"
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {theme === 'dark' ? (
