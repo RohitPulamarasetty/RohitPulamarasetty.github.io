@@ -198,7 +198,7 @@ export default function Hero() {
 
           {/* Name — the thesis. Display face, uppercase, tight. Pixel DNA
               is limited to the single blinking caret. */}
-          <h1 className="font-display font-bold uppercase text-[var(--color-text)] leading-[0.92] tracking-[-0.02em] text-[clamp(2.1rem,6.4vw,4.4rem)] mb-6">
+          <h1 className="font-display font-extrabold uppercase text-[var(--color-text)] leading-[0.9] tracking-[-0.02em] text-[clamp(2rem,8.6vw,4.4rem)] mb-6">
             <span className="block overflow-hidden py-[0.04em]">
               <span className="hero-name-line block whitespace-nowrap">Rohit Kumar</span>
             </span>
@@ -211,8 +211,8 @@ export default function Hero() {
           </h1>
 
           {/* Value proposition */}
-          <p className="hero-rise font-display text-xl sm:text-2xl font-medium text-[var(--color-text)] leading-snug mb-4 max-w-md">
-            I build things, then figure out what to build next.
+          <p className="hero-rise font-display text-xl sm:text-2xl font-semibold text-[var(--color-text)] leading-snug mb-4 max-w-md text-balance">
+            I turn ideas into products people actually use.
           </p>
           <p className="hero-rise text-[15px] leading-relaxed text-[var(--color-text-muted)] mb-9 max-w-md">
             Founder of Beyond Binary Solutions. Shipped IITM Grade Suite and Findora — now
@@ -224,7 +224,7 @@ export default function Hero() {
             <a
               ref={primaryRef}
               href="#work"
-              className="hero-cta group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 pixel-corners-sm pixel-shadow-sm bg-[var(--color-accent)] text-white font-display font-semibold text-sm uppercase tracking-wide hover:brightness-105 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-[filter,transform,box-shadow] will-change-transform"
+              className="hero-cta group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 pixel-corners-sm pixel-shadow-sm bg-[var(--color-accent)] text-white font-display font-semibold text-sm uppercase tracking-wide hover:brightness-110 active:brightness-95 transition-[filter,box-shadow] will-change-transform"
             >
               View my work
               <ArrowRight
@@ -333,7 +333,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full bg-[var(--color-accent-2)] animate-ping opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 bg-[var(--color-accent-2)]" />
             </span>
-            <span>Bangalore</span>
+            <span>Vizag</span>
             <span className="text-[var(--color-border)]" aria-hidden>&rarr;</span>
             <span>Chennai</span>
             <span className="text-[var(--color-border)]" aria-hidden>&rarr;</span>

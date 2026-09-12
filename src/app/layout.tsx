@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Inter, JetBrains_Mono, Silkscreen } from 'next/font/google'
+import { Bricolage_Grotesque, Inter, JetBrains_Mono, Silkscreen } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -8,11 +8,11 @@ import RevealController from '@/components/layout/RevealController'
 import { socials } from '@/lib/data'
 import './globals.css'
 
-const grotesk = Space_Grotesk({
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['500', '600', '700'],
+  weight: ['500', '600', '700', '800'],
 })
 
 const inter = Inter({
@@ -246,7 +246,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${grotesk.variable} ${inter.variable} ${jetbrains.variable} ${silkscreen.variable} font-sans antialiased`}>
+      <body className={`${display.variable} ${inter.variable} ${jetbrains.variable} ${silkscreen.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <SmoothScroll>
             <a
