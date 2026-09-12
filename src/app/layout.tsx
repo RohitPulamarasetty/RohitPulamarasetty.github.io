@@ -37,6 +37,12 @@ const silkscreen = Silkscreen({
 })
 
 const BASE_URL = 'https://rohitpulamarasetty.github.io'
+
+// Google Search Console verification token. Get it from Search Console →
+// add property "https://rohitpulamarasetty.github.io/" → "HTML tag" method →
+// copy the content value here (just the token, e.g. "abc123..."). Deploy,
+// then click Verify. Leaving it empty renders no verification tag.
+const GOOGLE_SITE_VERIFICATION = ''
 const TITLE = 'Rohit Kumar Pulamarasetty — IIT Madras Builder & Founder'
 const DESCRIPTION =
   'Rohit Kumar Pulamarasetty is a Data Science student at IIT Madras (BS \'28) and founder of Beyond Binary Solutions. He built IITM Grade Suite (2,000+ students), Findora, and FoundBrew, and is going deeper into machine learning and quantitative finance.'
@@ -90,9 +96,10 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 675,
+        type: 'image/jpeg',
         alt: 'Rohit Kumar Pulamarasetty — IIT Madras builder and founder of Beyond Binary Solutions',
       },
     ],
@@ -101,11 +108,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: BASE_URL,
+    canonical: `${BASE_URL}/`,
   },
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
 }
 
 export const viewport = {

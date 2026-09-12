@@ -5,7 +5,7 @@ export const dynamic = 'force-static'
 const BUILD_DATE = new Date()
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://rohitpulamarasetty.github.io'
+  const base = 'https://rohitpulamarasetty.github.io/'
   return [
     {
       url: base,
